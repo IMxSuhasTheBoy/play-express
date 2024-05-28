@@ -8,7 +8,7 @@
     "start": "node server",
     "static": "node --watch server",
     "json": "node --watch --env-file=.env serverJSON",
-    "body": "node --watch --env-file=.env serverBody"
+    "es6": "node --watch --env-file=.env serverES6"
   },
   "keywords": [
     "node",
