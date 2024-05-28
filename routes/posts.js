@@ -34,22 +34,22 @@ router.get("/", (req, res) => {
 });
 
 //TODO: get single post
-router.get("/:id", (req, res) => {
+router.get("/:id", (req, res, next) => {
   // console.log(req.params, "posts/:id ~ req.params");
   // console.log(parseInt(req.params.id));
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
   if (!post) {
-    return res
-      .status(404)
-      .json({ message: `post with id ${id} not found! ! !` });
+    const error = new Error(`post with id ${id} not found! ! !`);
+    error.status = 404;
+    return next(error);
   }
   res.status(200).json(post);
   // res.status(200).json(posts.filter((post) => post.id === id));
 });
 
 //TODO: create new post
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   console.log(req.body, "posts ~ req.body");
 
   const newPost = {
@@ -58,7 +58,9 @@ router.post("/", (req, res) => {
   };
 
   if (!newPost.title) {
-    return res.status(400).json({ message: "title is required" });
+    const error = new Error(`title is required! ! !`);
+    error.status = 400;
+    return next(error);
   }
 
   posts.push(newPost);
@@ -70,9 +72,9 @@ router.put("/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
   if (!post) {
-    return res
-      .status(404)
-      .json({ message: `post with id ${id} not found! ! !` });
+    const error = new Error(`post with id ${id} not found! ! !`);
+    error.status = 404;
+    return next(error);
   }
 
   if (!req.body.title) {
@@ -89,9 +91,9 @@ router.delete("/:id", (req, res) => {
   const post = posts.find((post) => post.id === id);
 
   if (!post) {
-    return res
-      .status(404)
-      .json({ message: `post with id ${id} not found! ! !` });
+    const error = new Error(`post with id ${id} not found! ! !`);
+    error.status = 404;
+    return next(error);
   }
 
   posts = posts.filter((post) => post.id !== id);
