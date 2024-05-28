@@ -83,5 +83,20 @@ router.put("/:id", (req, res) => {
   res.status(200).json(post);
 });
 
+//TODO: delete post
+router.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const post = posts.find((post) => post.id === id);
+
+  if (!post) {
+    return res
+      .status(404)
+      .json({ message: `post with id ${id} not found! ! !` });
+  }
+
+  posts = posts.filter((post) => post.id !== id);
+  res.status(200).json({ posts, message: "post deleted" });
+});
+
 // module.exports = router;
 export default router;
