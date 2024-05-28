@@ -18,6 +18,7 @@
   "author": "IMxSuhasTheBoy",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "express": "^4.19.2"
   }
 }
