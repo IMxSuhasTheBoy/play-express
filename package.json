@@ -1,12 +1,14 @@
 {
   "name": "play-express",
   "version": "1.0.0",
-  "description": "express nativ stuff maan experiments & tests",
+  "description": "express native stuff maan experiments & tests",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server",
     "static": "node --watch server",
-    "json": "node --watch --env-file=.env serverJSON"
+    "json": "node --watch --env-file=.env serverJSON",
+    "body": "node --watch --env-file=.env serverBody"
   },
   "keywords": [
     "node",

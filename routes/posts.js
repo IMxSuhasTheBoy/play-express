@@ -1,6 +1,8 @@
-const express = require("express");
+// const express = require("express");
+import { Router } from "express";
+// const router = express.Router();
 
-const router = express.Router();
+const router = Router();
 
 let posts = [
   {
@@ -17,7 +19,7 @@ let posts = [
   },
 ];
 
-//get all posts
+//TODO: get all posts
 router.get("/", (req, res) => {
   //! accept only the data that can be accepted(expected data)
   console.log(req.query);
@@ -31,7 +33,7 @@ router.get("/", (req, res) => {
   res.status(200).json(posts);
 });
 
-//get single post
+//TODO: get single post
 router.get("/:id", (req, res) => {
   // console.log(req.params, "posts/:id ~ req.params");
   // console.log(parseInt(req.params.id));
@@ -46,4 +48,22 @@ router.get("/:id", (req, res) => {
   // res.status(200).json(posts.filter((post) => post.id === id));
 });
 
-module.exports = router;
+//TODO: create new post
+router.post("/", (req, res) => {
+  console.log(req.body, "posts ~ req.body");
+
+  const newPost = {
+    id: posts.length + 1,
+    title: req.body.title,
+  };
+
+  if (!newPost.title) {
+    return res.status(400).json({ message: "title is required" });
+  }
+
+  posts.push(newPost);
+  res.status(201).json(posts);
+});
+
+// module.exports = router;
+export default router;
